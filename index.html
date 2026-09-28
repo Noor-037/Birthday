@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wgt@00;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--Background: soft blobs, twinkling stars-->
+    <div id="bg" class="layer" aria-hidden="true">
+        <i class="bokeh b1"></i><i class="bokeh b2"></i><i class="bokeh b3"></i><i class="bokeh b4"></i>
+        <div id="twinkles"></div>
+        <div class="bunting">
+            <svg viewBox="0 0 1000 90" preserveAspectRatio="none"><path d="M0 8 Q500 60 1000 8" fill="none" stroke="rgba(150,110,170,.55)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+            <div id="flags"></div>
+        </div>
+    </div>
+    <div id="balloons" class="layer" aria-hidden="true"></div>
+    <canvas id="confetti" aria-hidden="true"></canvas>
+
+    <!--STAGE !:Countdown -->
+    <section id="stage-countdown" class="stage" aria-label="Countdown">
+        <p class="cd-label" data-cfg="COUNTDOWN_LABEL"></p>
+        <div class="cd-wrap">
+            <div id="cdRing" class="cd-ring"></div>
+            <div id="cdNumber" class="cd-number" aria-live="polite"></div>
+        </div>
+    </section>
+
+    <!--STAGE2 : Cake-->
+    <section id="stage-cake" class="stage" aria-label="Birthday Cake">
+        <div class="room-glow" aria-hidden="true"><i></i></div>
+        <p class="cake-caption" data-cfg="CAKE_CAPTION"></p>
+        
+        <div class="cake">
+            <svg class="cake-svg" aria-label="A two tier birthday with three lit candles">
+                <defs>
+                    <linearGradient id="spPink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffa6c2"/><stop offset="1" stop-color="#ff7fa6"/></linearGradient>
+                    <linearGradient id="spLav" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d0bfff"/><stop offset="1" stop-color="#a98cff"/></linearGradient>
+                    <linearGradient id="fOuter" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff8a1f"/><stop offset=".6" stop-color="#ffb52e"/><stop offset="1" stop-color="#ffe27a"/></linearGradient>
+                    <linearGradient id="fInner" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffe9a0"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+                    <radialGradient id="gGlow"><stop offset="0" stop-color="#ffd27a" stop-opacity=".8"/><stop offset=".5" stop-color="#ffb84d" stop-opacity=".25"/><stop offset="1" stop-color="#ffb84d" stop-opacity="0"/></radialGradient>
+                    <pattern id="stripe" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4.5" height="9" fill="#fff" opacity=".6"/></pattern>
+                </defs>
+                        
+                <!--shadow + plate-->
+                <ellipse cx="160" cy="305" rx="140" ry="10" fill="rgba(0,20,80,16)"></ellipse>
+                <ellipse cx="160" cy="293" rx="150" ry="16" fill="#fff"></ellipse>
+                <ellipse cx="160" cy="291" rx="130" ry="11" fill="#fdeaf2" stroke="#f4cfe0" stroke-width="1"></ellipse>
+
+                <!--bottom cake-->
+                <rect x="40" y="206" width="240" height="84" rx="16" fill="url(#spPink)"></rect>
+                <g fill="#fff6fa">
+                    <circle cx="56" cy="284" r="6.5"></circle><circle cx="74" cy="284" r="6.5"></circle><circle cx="92" cy="284" r="6.5"></circle><circle cx="110" cy="284" r="6.5"></circle>
+                    <circle cx="128" cy="284" r="6.5"></circle><circle cx="146" cy="284" r="6.5"></circle><circle cx="164" cy="284" r="6.5"></circle><circle cx="182" cy="284" r="6.5"></circle>
+                    <circle cx="200" cy="284" r="6.5"></circle><circle cx="218" cy="284" r="6.5"></circle><circle cx="236" cy="284" r="6.5"></circle><circle cx="254" cy="284" r="6.5"></circle><circle cx="272" cy="284" r="6.5"></circle>
+                </g>
+                <!--sprinkle -->
+                <g>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#fff" transform="translate(62 244) rotate(25)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#ffe066" transform="translate(96 258) rotate(-30)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#a8f0d4" transform="translate(126 242) rotate(60)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#fff" transform="translate(154 262) rotate(10)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#ffe066" transform="translate(186 244) rotate(-50)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#a8f0d4" transform="translate(216 260) rotate(35)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#fff" transform="translate(246 242) rotate(-20)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#a8f0d4" transform="translate(70 268) rotate(-60)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#ffe066" transform="translate(240 268) rotate(70)"/>
+                    <rect x="-4" y="-1.5" width="8" height="3" rx="1.5" fill="#fff" transform="translate(112 270) rotate(-10)"/>
+                </g>
+                <!--bottom cream -->
+                <g class="cream" fill="#fff6fa">
+                    <rect x="40" y="196" width="240" height="26" rx="13"></rect>
+                    <circle cx="62" cy="222" r="10"></circle><circle cx="98" cy="222" r="10"></circle><circle cx="140" cy="222" r="10"></circle>
+                    <circle cx="182" cy="222" r="10"></circle><circle cx="224" cy="222" r="10"></circle><circle cx="258" cy="222" r="10"></circle>
+                    <rect x="88" y="218" width="16" height="30" rx="8"></rect><rect x="170" y="218" width="16" height="22" rx="8"></rect><rect x="236" y="218" width="14" height="32" rx="7"></rect>
+                </g>
+
+                <!--top cake-->
+                <rect x="82" y="134" width="156" height="68" rx="14" fill="url(#spLav)"></rect>
+                <g fill="#fff" opacity=".85">
+                    <circle cx="108" cy="176" r="3"></circle><circle cx="134" cy="188" r="3"></circle><circle cx="160" cy="174" r="3"></circle><circle cx="186" cy="188" r="3"></circle><circle cx="212" cy="176" r="3"></circle>
+                </g>
+
+                <!--candles-->
+                <!-- candles (drawn before the top cream so their base is tucked in) -->
+                <g class="candle" style="--k:0" transform="translate(128 0)">
+                    <rect x="-4.5" y="80" width="9" height="46" rx="3" fill="#ff8fab"/><rect x="-4.5" y="80" width="9" height="46" rx="3" fill="url(#stripe)"/>
+                    <rect x="-.8" y="73" width="1.6" height="8" rx=".8" fill="#5b4636"/>
+                    <g transform="translate(0 70)"><path class="smoke" style="--k:0" d="M0 0 C-5 -8 5 -14 0 -22 C-5 -30 4 -36 0 -46" fill="none" stroke="rgba(140,120,165,.8)" stroke-width="2" stroke-linecap="round"/></g>
+                    <g transform="translate(0 74)">
+                    <g class="glow-wrap"><circle class="glow" cx="0" cy="-13" r="34" fill="url(#gGlow)"/></g>
+                    <g class="flame-wrap"><g class="flame">
+                        <path d="M0 2.5 C-7.2 2.5 -8 -6.4 -2.8 -13.6 C-.8 -16.8 0 -20.8 0 -26.4 C.8 -20.8 2 -16.8 4 -13.6 C8 -7.2 7.2 2.5 0 2.5Z" fill="url(#fOuter)"/>
+                        <path d="M0 1 C-3.6 1 -4 -4 -1.2 -8 C0 -9.6 0 -12 0 -14.4 C.4 -12 .8 -9.6 2 -8 C4 -4 3.6 1 0 1Z" fill="url(#fInner)"/>
+                        <ellipse cx="0" cy="0" rx="2.4" ry="1.8" fill="#7cc4ff" opacity=".75"/>
+                    </g></g>
+                    </g>
+                </g>
+                <g class="candle" style="--k:1" transform="translate(160 0)">
+                    <rect x="-4.5" y="80" width="9" height="46" rx="3" fill="#7ee0c3"/><rect x="-4.5" y="80" width="9" height="46" rx="3" fill="url(#stripe)"/>
+                    <rect x="-.8" y="73" width="1.6" height="8" rx=".8" fill="#5b4636"/>
+                    <g transform="translate(0 70)"><path class="smoke" style="--k:1" d="M0 0 C-5 -8 5 -14 0 -22 C-5 -30 4 -36 0 -46" fill="none" stroke="rgba(140,120,165,.8)" stroke-width="2" stroke-linecap="round"/></g>
+                    <g transform="translate(0 74)">
+                    <g class="glow-wrap"><circle class="glow" cx="0" cy="-13" r="34" fill="url(#gGlow)"/></g>
+                    <g class="flame-wrap"><g class="flame">
+                        <path d="M0 2.5 C-7.2 2.5 -8 -6.4 -2.8 -13.6 C-.8 -16.8 0 -20.8 0 -26.4 C.8 -20.8 2 -16.8 4 -13.6 C8 -7.2 7.2 2.5 0 2.5Z" fill="url(#fOuter)"/>
+                        <path d="M0 1 C-3.6 1 -4 -4 -1.2 -8 C0 -9.6 0 -12 0 -14.4 C.4 -12 .8 -9.6 2 -8 C4 -4 3.6 1 0 1Z" fill="url(#fInner)"/>
+                        <ellipse cx="0" cy="0" rx="2.4" ry="1.8" fill="#7cc4ff" opacity=".75"/>
+                    </g></g>
+                    </g>
+                </g>
+                <g class="candle" style="--k:2" transform="translate(192 0)">
+                    <rect x="-4.5" y="80" width="9" height="46" rx="3" fill="#ffd166"/><rect x="-4.5" y="80" width="9" height="46" rx="3" fill="url(#stripe)"/>
+                    <rect x="-.8" y="73" width="1.6" height="8" rx=".8" fill="#5b4636"/>
+                    <g transform="translate(0 70)"><path class="smoke" style="--k:2" d="M0 0 C-5 -8 5 -14 0 -22 C-5 -30 4 -36 0 -46" fill="none" stroke="rgba(140,120,165,.8)" stroke-width="2" stroke-linecap="round"/></g>
+                    <g transform="translate(0 74)">
+                    <g class="glow-wrap"><circle class="glow" cx="0" cy="-13" r="34" fill="url(#gGlow)"/></g>
+                    <g class="flame-wrap"><g class="flame">
+                        <path d="M0 2.5 C-7.2 2.5 -8 -6.4 -2.8 -13.6 C-.8 -16.8 0 -20.8 0 -26.4 C.8 -20.8 2 -16.8 4 -13.6 C8 -7.2 7.2 2.5 0 2.5Z" fill="url(#fOuter)"/>
+                        <path d="M0 1 C-3.6 1 -4 -4 -1.2 -8 C0 -9.6 0 -12 0 -14.4 C.4 -12 .8 -9.6 2 -8 C4 -4 3.6 1 0 1Z" fill="url(#fInner)"/>
+                        <ellipse cx="0" cy="0" rx="2.4" ry="1.8" fill="#7cc4ff" opacity=".75"/>
+                    </g></g>
+                    </g>
+                </g>
+                <!--top cream -->
+                <g class="cream" fill="#fff6fa">
+                    <rect x="82" y="122" width="156" height="26" rx="13"/>
+                    <circle cx="100" cy="148" r="9"/><circle cx="128" cy="148" r="9"/><circle cx="160" cy="148" r="9"/><circle cx="192" cy="148" r="9"/><circle cx="220" cy="148" r="9"/>
+                    <rect x="112" y="144" width="14" height="28" rx="7"/><rect x="176" y="144" width="14" height="20" rx="7"/><rect x="206" y="144" width="12" height="24" rx="6"/>
+                </g>
+                <!-- cherries -->
+                <g>
+                    <path d="M100 112 Q102 104 108 101" fill="none" stroke="#5aa06a" stroke-width="1.6" stroke-linecap="round"/><circle cx="100" cy="117" r="7" fill="#ff4d6d"/><circle cx="98" cy="114.5" r="1.8" fill="#fff" opacity=".7"/>
+                    <path d="M220 112 Q218 104 212 101" fill="none" stroke="#5aa06a" stroke-width="1.6" stroke-linecap="round"/><circle cx="220" cy="117" r="7" fill="#ff4d6d"/><circle cx="218" cy="114.5" r="1.8" fill="#fff" opacity=".7"/>
+                </g>
+            
+            </svg>
+        </div>    
+
+        <button id="blowBtn" class="btn btn-blow" type="button">🎂 Blow the Candles 🎂</button>
+        <p class="cake-hint" data-cfg="CAKE_HINT">Close your eyes, make a wish… then blow! 🌟</p>
+
+    </section>
+
+    <!-- Room-dimming overlay shown right after the candles go out -->
+    <div id="dim" aria-hidden="true"><p class="dim-text" data-cfg="WISH_MOMENT_TEXT"></p></div>
+
+    <!--CELEBRATION PAGE-->
+    <section id="celebration" class="hero celebration">
+        <h1 id="heroTitle" class="hero-title"></h1>
+        <p id="heroName" class="hero-name" data-cfg="NAME"></p>
+        <p id="heroMsg" class="hero-msg">
+        <span id="heroMsgFull" class="sr-only"></span>
+        <span id="heroMsgTyped" class="typed" aria-hidden="true"></span>
+        </p>
+        <button id="scrollCue" class="scroll-cue" type="button">Keep scrolling ↓</button>
+    </section>
+    <!-- BIRTHDAY WISH -->
+    <section id="wish" class="section">
+        <h2 class="section-title reveal" data-cfg="WISH_TITLE"></h2>
+        <div class="wish-card reveal" style="--delay:.15s">
+        <p class="wish-text" data-cfg="WISH_MESSAGE"></p>
+        </div>
+    </section>
+
+    <!-- FINAL MESSAGE  -->
+    <section id="final" class="final">
+        <div id="heartsLayer" class="hearts-layer" aria-hidden="true"></div>
+        
+        <button id="replayBtn" class="btn" type="button">🔁 Replay the celebration</button>
+    </section>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
